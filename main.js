@@ -24,6 +24,8 @@ function addTrashBoxButton(element, index) {
     });
     $(element).hide();
     $(element).css('background-color', 'lightgrey');
+    $('#' + id_name).hide();
+    addPickUpTrashButton(element, index);
   });
 }
 
@@ -38,6 +40,8 @@ function addPickUpTrashButton(element, index) {
     });
     $(element).show();
     $(element).css('background-color', '');
+    $('#' + id_name).hide();
+    addTrashBoxButton(element, index);
   });
 }
 
