@@ -63,6 +63,23 @@ class SearchBase {
       $(this.frameClassName + ':hidden').show();
     });
   }
+
+  runExtension() {
+    // interface
+  }
+
+  initHideAndShow(element, url, index) {
+    this.isHide(url).then((isHide) => {
+      if(isHide) {
+        $(element).hide();
+        $(element).css('background-color', this.trashUrlBackgroundColor);
+        this.addPickUpTrashButton(element, index);
+      } else {
+        this.addTrashBoxButton(element, index);
+      }
+    });
+
+  }
 }
 
 class GoogleSearch extends SearchBase {
@@ -86,22 +103,17 @@ class GoogleSearch extends SearchBase {
     const url = $(element).find('a').attr('href');
     super.declarePickUpTrashButton(element, url, index);
   }
+
+  runExtension() {
+    let elements = $(this.frameClassName);
+    for(let i = 0; i < elements.length; i++) {
+      const url = $(elements[i]).find('a').attr('href');
+      super.initHideAndShow(elements[i], url, i + 1);
+    }
+
+    this.addHiddenContentButton();
+  }
 }
 
 let google_search = new GoogleSearch();
-let elements = $('.g');
-for(let i = 0; i < elements.length; i++) {
-  let url = $(elements[i]).find('a').attr('href');
-
-  google_search.isHide(url).then(function(hide){
-    if(hide) {
-      $(elements[i]).hide();
-      $(elements[i]).css('background-color', 'lightgrey');
-      google_search.addPickUpTrashButton(elements[i], i+1);
-    } else {
-      google_search.addTrashBoxButton(elements[i], i+1);
-    }
-  });
-}
-
-google_search.addHiddenContentButton();
+google_search.runExtension();
