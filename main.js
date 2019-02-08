@@ -5,6 +5,9 @@ class SearchBase {
     this.pickUpTrashButtonIdPrefix = 'pickUpTrash';
     this.hiddenContentButtonId = 'hiddenContentButton';
     this.trashUrlBackgroundColor = 'lightgrey';
+    this.trashBoxInImgPath = chrome.runtime.getURL('trashBoxIn.png');
+    this.trashBoxOutImgPath = chrome.runtime.getURL('trashBoxOut.png');
+    this.trashBoxImgPath = chrome.runtime.getURL('trashBox.png');
   }
 
   isHide(url) {
@@ -54,7 +57,7 @@ class SearchBase {
 
   addHiddenContentButton() {
     let elements = $(this.frameClassName);
-    $(elements[elements.length - 1]).after('<button id=' + this.hiddenContentButtonId + ' type="button">HideContents</button>');
+    $(elements[elements.length - 1]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">');
     this.declareHiddenContentButton();
   }
 
@@ -78,7 +81,6 @@ class SearchBase {
         this.addTrashBoxButton(element, index);
       }
     });
-
   }
 }
 
@@ -91,7 +93,7 @@ class GoogleSearch extends SearchBase {
   addTrashBoxButton(element, index) {
     const id_name = this.trashBoxButtonIdPrefix + index;
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<button id=' + id_name + ' type="button">Trash</button>');
+    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox">');
     const url = $(element).find('a').attr('href');
     super.declareTrashBoxButton(element, url, index);
   }
@@ -99,7 +101,7 @@ class GoogleSearch extends SearchBase {
   addPickUpTrashButton(element, index) {
     const id_name = this.pickUpTrashButtonIdPrefix + index;
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<button id=' + id_name + ' type="button">PickUp</button');
+    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp">');
     const url = $(element).find('a').attr('href');
     super.declarePickUpTrashButton(element, url, index);
   }
