@@ -56,9 +56,7 @@ class SearchBase {
   }
 
   addHiddenContentButton() {
-    let elements = $(this.frameClassName);
-    $(elements[elements.length - 1]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">');
-    this.declareHiddenContentButton();
+    // interface
   }
 
   declareHiddenContentButton() {
@@ -114,6 +112,20 @@ class GoogleSearch extends SearchBase {
     }
 
     this.addHiddenContentButton();
+  }
+
+  addHiddenContentButton() {
+    let hiddenElementsNum = $(this.frameClassName + ':hidden').length;
+    console.log(hiddenElementsNum);
+    let elements = $(this.frameClassName);
+    for(let i = elements.length - 1; i>=0; i--) {
+      // 検索結果の右側にスペック情報とかが表示されて意図しない位置に表示されるのを防ぐ
+      if(!$(elements[i]).hasClass('rhsvw')) {
+        $(elements[i]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">' + hiddenElementsNum);
+        break;
+      }
+    }
+    this.declareHiddenContentButton();
   }
 }
 
