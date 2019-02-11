@@ -17,6 +17,7 @@
   "web_accessible_resources": [
     "trashBoxIn.png",
     "trashBoxOut.png",
-    "trashBox.png"
+    "trashBoxShow.png",
+    "trashBoxHide.png"
   ]
 }

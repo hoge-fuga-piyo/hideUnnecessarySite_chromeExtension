@@ -7,7 +7,8 @@ class SearchBase {
     this.trashUrlBackgroundColor = 'lightgrey';
     this.trashBoxInImgPath = chrome.runtime.getURL('trashBoxIn.png');
     this.trashBoxOutImgPath = chrome.runtime.getURL('trashBoxOut.png');
-    this.trashBoxImgPath = chrome.runtime.getURL('trashBox.png');
+    this.trashBoxHideImgPath = chrome.runtime.getURL('trashBoxHide.png');
+    this.trashBoxShowImgPath = chrome.runtime.getURL('trashBoxShow.png');
     this.hiddenContentSpaceId = 'hiddenContentSpace';
     this.hiddenContentNumId = 'hiddenContentNum';
     this.hiddenContentNum = 0;
@@ -76,9 +77,11 @@ class SearchBase {
     $('#' + this.hiddenContentButtonId).on('click', () => {
       if(this.hiddenContentState === 'HIDE') {
         $('.' + this.hiddenContentClass).show();
+        $('#' + this.hiddenContentButtonId).attr('src', this.trashBoxShowImgPath);
         this.hiddenContentState = 'SHOW';
       } else {
         $('.' + this.hiddenContentClass).hide();
+        $('#' + this.hiddenContentButtonId).attr('src', this.trashBoxHideImgPath);
         this.hiddenContentState = 'HIDE';
       }
     });
