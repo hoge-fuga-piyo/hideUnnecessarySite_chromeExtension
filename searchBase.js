@@ -11,6 +11,8 @@ class SearchBase {
     this.hiddenContentSpaceId = 'hiddenContentSpace';
     this.hiddenContentNumId = 'hiddenContentNum';
     this.hiddenContentNum = 0;
+    this.hiddenContentClass = "hiddenContet";
+    this.hiddenContentState = "HIDE";
   }
 
   isHide(url) {
@@ -33,14 +35,17 @@ class SearchBase {
   declareTrashBoxButton(element, url, index) {
     const id_name = this.trashBoxButtonIdPrefix + index;
     $('#' + id_name).on('click', () => {
-      chrome.storage.local.set({[url] : true}, function(){
-      });
-      $(element).hide();
+      chrome.storage.local.set({[url] : true}, function(){});
+      if(this.hiddenContentState === "HIDE") {
+        $(element).hide();
+        $('#' + id_name).hide();
+      }
+      $('#' + id_name).remove();
+      $(element).addClass(this.hiddenContentClass);
+      this.addPickUpTrashButton(element, index);
       $(element).css('background-color', this.trashUrlBackgroundColor);
-      $('#' + id_name).hide();
       this.hiddenContentNum++;
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
-      this.addPickUpTrashButton(element, index);
     });
   }
 
@@ -55,7 +60,8 @@ class SearchBase {
       });
       $(element).show();
       $(element).css('background-color', '');
-      $('#' + id_name).hide();
+      $(element).removeClass(this.hiddenContentClass);
+      $('#' + id_name).remove();
       this.hiddenContentNum--;
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addTrashBoxButton(element, index);
@@ -68,12 +74,14 @@ class SearchBase {
 
   declareHiddenContentButton() {
     $('#' + this.hiddenContentButtonId).on('click', () => {
-      $(this.frameClassName + ':hidden').show();
+      if(this.hiddenContentState === 'HIDE') {
+        $('.' + this.hiddenContentClass).show();
+        this.hiddenContentState = 'SHOW';
+      } else {
+        $('.' + this.hiddenContentClass).hide();
+        this.hiddenContentState = 'HIDE';
+      }
     });
-  }
-
-  runExtension() {
-    // interface
   }
 
   initHideAndShow(element, url, index) {
@@ -81,10 +89,15 @@ class SearchBase {
       if(isHide) {
         $(element).hide();
         $(element).css('background-color', this.trashUrlBackgroundColor);
+        $(element).addClass(this.hiddenContentClass);
         this.addPickUpTrashButton(element, index);
       } else {
         this.addTrashBoxButton(element, index);
       }
     });
+  }
+
+  runExtension() {
+    // interface
   }
 }
