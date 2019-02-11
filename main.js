@@ -8,6 +8,8 @@ class SearchBase {
     this.trashBoxInImgPath = chrome.runtime.getURL('trashBoxIn.png');
     this.trashBoxOutImgPath = chrome.runtime.getURL('trashBoxOut.png');
     this.trashBoxImgPath = chrome.runtime.getURL('trashBox.png');
+    this.hiddenContentNumId = 'hiddenContentNum';
+    this.hiddenContentNum = 0;
   }
 
   isHide(url) {
@@ -35,6 +37,9 @@ class SearchBase {
       $(element).hide();
       $(element).css('background-color', this.trashUrlBackgroundColor);
       $('#' + id_name).hide();
+      this.hiddenContentNum++;
+      console.log(this.hiddenContentNum);
+      $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addPickUpTrashButton(element, index);
     });
   }
@@ -51,6 +56,9 @@ class SearchBase {
       $(element).show();
       $(element).css('background-color', '');
       $('#' + id_name).hide();
+      this.hiddenContentNum--;
+      console.log(this.hiddenContentNum);
+      $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addTrashBoxButton(element, index);
     });
   }
@@ -115,13 +123,16 @@ class GoogleSearch extends SearchBase {
   }
 
   addHiddenContentButton() {
-    let hiddenElementsNum = $(this.frameClassName + ':hidden').length;
-    console.log(hiddenElementsNum);
     let elements = $(this.frameClassName);
-    for(let i = elements.length - 1; i>=0; i--) {
+    for(let i = elements.length - 1; i >= 0; i--) {
       // 検索結果の右側にスペック情報とかが表示されて意図しない位置に表示されるのを防ぐ
       if(!$(elements[i]).hasClass('rhsvw')) {
-        $(elements[i]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">' + hiddenElementsNum);
+        $(elements[i]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">');
+        setTimeout(() => {
+          let hiddenElementsNum = $(this.frameClassName + ':hidden').length;
+          $('#' + this.hiddenContentButtonId).after('<span id=' + this.hiddenContentNumId + '>' + hiddenElementsNum + '</span>');
+          this.hiddenContentNum = hiddenElementsNum;
+        }, 100);
         break;
       }
     }
