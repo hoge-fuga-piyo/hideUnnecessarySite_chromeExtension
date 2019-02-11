@@ -97,7 +97,7 @@ class GoogleSearch extends SearchBase {
   addTrashBoxButton(element, index) {
     const id_name = this.trashBoxButtonIdPrefix + index;
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox">');
+    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox" width="14" height="16">');
     const url = $(element).find('a').attr('href');
     super.declareTrashBoxButton(element, url, index);
   }
@@ -105,7 +105,7 @@ class GoogleSearch extends SearchBase {
   addPickUpTrashButton(element, index) {
     const id_name = this.pickUpTrashButtonIdPrefix + index;
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp">');
+    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp" width="14" height="16">');
     const url = $(element).find('a').attr('href');
     super.declarePickUpTrashButton(element, url, index);
   }
