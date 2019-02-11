@@ -38,7 +38,6 @@ class SearchBase {
       $(element).css('background-color', this.trashUrlBackgroundColor);
       $('#' + id_name).hide();
       this.hiddenContentNum++;
-      console.log(this.hiddenContentNum);
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addPickUpTrashButton(element, index);
     });
@@ -57,7 +56,6 @@ class SearchBase {
       $(element).css('background-color', '');
       $('#' + id_name).hide();
       this.hiddenContentNum--;
-      console.log(this.hiddenContentNum);
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addTrashBoxButton(element, index);
     });
