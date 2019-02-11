@@ -38,13 +38,15 @@ class SearchBase {
     $('#' + id_name).on('click', () => {
       chrome.storage.local.set({[url] : true}, function(){});
       if(this.hiddenContentState === "HIDE") {
-        $(element).hide();
-        $('#' + id_name).hide();
+        $(element).slideUp(200, () => {
+          $(element).css('background-color', this.trashUrlBackgroundColor);
+        });
+      } else {
+        $(element).css('background-color', this.trashUrlBackgroundColor);
       }
       $('#' + id_name).remove();
       $(element).addClass(this.hiddenContentClass);
       this.addPickUpTrashButton(element, index);
-      $(element).css('background-color', this.trashUrlBackgroundColor);
       this.hiddenContentNum++;
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
     });
@@ -59,7 +61,7 @@ class SearchBase {
     $('#' + id_name).on('click', () => {
       chrome.storage.local.remove(url, function() {
       });
-      $(element).show();
+      //$(element).slideDown(200);
       $(element).css('background-color', '');
       $(element).removeClass(this.hiddenContentClass);
       $('#' + id_name).remove();
@@ -76,11 +78,11 @@ class SearchBase {
   declareHiddenContentButton() {
     $('#' + this.hiddenContentButtonId).on('click', () => {
       if(this.hiddenContentState === 'HIDE') {
-        $('.' + this.hiddenContentClass).show();
+        $('.' + this.hiddenContentClass).slideDown(200);
         $('#' + this.hiddenContentButtonId).attr('src', this.trashBoxShowImgPath);
         this.hiddenContentState = 'SHOW';
       } else {
-        $('.' + this.hiddenContentClass).hide();
+        $('.' + this.hiddenContentClass).slideUp(200);
         $('#' + this.hiddenContentButtonId).attr('src', this.trashBoxHideImgPath);
         this.hiddenContentState = 'HIDE';
       }
