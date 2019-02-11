@@ -8,6 +8,7 @@ class SearchBase {
     this.trashBoxInImgPath = chrome.runtime.getURL('trashBoxIn.png');
     this.trashBoxOutImgPath = chrome.runtime.getURL('trashBoxOut.png');
     this.trashBoxImgPath = chrome.runtime.getURL('trashBox.png');
+    this.hiddenContentSpaceId = 'hiddenContentSpace';
     this.hiddenContentNumId = 'hiddenContentNum';
     this.hiddenContentNum = 0;
   }
@@ -125,7 +126,7 @@ class GoogleSearch extends SearchBase {
     for(let i = elements.length - 1; i >= 0; i--) {
       // 検索結果の右側にスペック情報とかが表示されて意図しない位置に表示されるのを防ぐ
       if(!$(elements[i]).hasClass('rhsvw')) {
-        $(elements[i]).after('<input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents">');
+        $(elements[i]).after('<div id=' + this.hiddenContentSpaceId + '><input id=' + this.hiddenContentButtonId + ' type="image" src=' + this.trashBoxImgPath + ' alt="ShowHiddenContents"></div>');
         setTimeout(() => {
           let hiddenElementsNum = $(this.frameClassName + ':hidden').length;
           $('#' + this.hiddenContentButtonId).after('<span id=' + this.hiddenContentNumId + '>' + hiddenElementsNum + '</span>');
