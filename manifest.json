@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.google.com/search?*"],
-      "js": ["jquery-3.3.1.min.js", "main.js"],
+      "js": ["jquery-3.3.1.min.js", "searchBase.js", "googleSearch.js", "main.js"],
       "css": ["style.css"]
     }
   ],
