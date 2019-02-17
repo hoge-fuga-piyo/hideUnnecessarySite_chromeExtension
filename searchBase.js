@@ -61,7 +61,6 @@ class SearchBase {
     $('#' + id_name).on('click', () => {
       chrome.storage.local.remove(url, function() {
       });
-      //$(element).slideDown(200);
       $(element).css('background-color', '');
       $(element).removeClass(this.hiddenContentClass);
       $('#' + id_name).remove();
