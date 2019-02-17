@@ -9,7 +9,7 @@ class GoogleSearch extends SearchBase {
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
     action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox" width="14" height="16">');
     const url = $(element).find('a').attr('href');
-    super.declareTrashBoxButton(element, url, index);
+    super.declareTrashBoxButton(element, decodeURIComponent(url), index);
   }
 
   addPickUpTrashButton(element, index) {
@@ -17,7 +17,7 @@ class GoogleSearch extends SearchBase {
     let action_menu = $(element).find('.action-menu' + '.ab_ctl');
     action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp" width="14" height="16">');
     const url = $(element).find('a').attr('href');
-    super.declarePickUpTrashButton(element, url, index);
+    super.declarePickUpTrashButton(element, decodeURIComponent(url), index);
   }
 
   runExtension() {
