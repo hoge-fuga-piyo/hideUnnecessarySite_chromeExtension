@@ -24,7 +24,7 @@ class GoogleSearch extends SearchBase {
     let elements = $(this.frameClassName);
     for(let i = 0; i < elements.length; i++) {
       const url = $(elements[i]).find('a').attr('href');
-      super.initHideAndShow(elements[i], url, i + 1);
+      super.initHideAndShow(elements[i], decodeURIComponent(url), i + 1);
     }
 
     this.addHiddenContentButton();
