@@ -5,24 +5,24 @@
 
   "manifest_version": 2,
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "img/icon.png",
     "default_title": "Hide Unnecessary Site",
-    "default_popup": "popup.html"
+    "default_popup": "src/popup/popup.html"
   },
   "content_scripts": [
     {
       "matches": ["https://www.google.com/search?*"],
-      "js": ["jquery-3.3.1.min.js", "searchBase.js", "googleSearch.js", "content.js"],
-      "css": ["content.css"]
+      "js": ["src/3rdparty/jquery-3.3.1.min.js", "src/content/searchBase.js", "src/content/googleSearch.js", "src/content/content.js"],
+      "css": ["src/content/content.css"]
     }
   ],
   "permissions": [
     "storage"
   ],
   "web_accessible_resources": [
-    "trashBoxIn.png",
-    "trashBoxOut.png",
-    "trashBoxShow.png",
-    "trashBoxHide.png"
+    "img/trashBoxIn.png",
+    "img/trashBoxOut.png",
+    "img/trashBoxShow.png",
+    "img/trashBoxHide.png"
   ]
 }

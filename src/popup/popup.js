@@ -1,4 +1,4 @@
-class Popup {
+class HiddenContent {
   constructor(urlsId, noContentId) {
     this.urlsId = urlsId;
     this.noContentId = noContentId;
@@ -29,18 +29,16 @@ class Popup {
 
   declareRemoveButton() {
     $('.removeButton').on('click', {num: this.hiddenContentNum, noContentId: this.noContentId}, function(e) {
-      console.log(e.data.num);
       let url = $(this).prev('a').attr('href');
       chrome.storage.local.remove(url, function(){});
       $(this).parent('div').remove();
       e.data.num--;
       if(e.data.num === 0) {
-        console.log($('#' + e.data.noContentId));
         $('#' + e.data.noContentId).show();
       }
     });
   }
 }
 
-let popupAction = new Popup('urls', 'no_content_text');
+let popupAction = new HiddenContent('urls', 'noContentText');
 popupAction.showHiddenUrls();

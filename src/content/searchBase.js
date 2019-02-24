@@ -5,10 +5,10 @@ class SearchBase {
     this.pickUpTrashButtonIdPrefix = 'pickUpTrash';
     this.hiddenContentButtonId = 'hiddenContentButton';
     this.trashUrlBackgroundColor = 'lightgrey';
-    this.trashBoxInImgPath = chrome.runtime.getURL('trashBoxIn.png');
-    this.trashBoxOutImgPath = chrome.runtime.getURL('trashBoxOut.png');
-    this.trashBoxHideImgPath = chrome.runtime.getURL('trashBoxHide.png');
-    this.trashBoxShowImgPath = chrome.runtime.getURL('trashBoxShow.png');
+    this.trashBoxInImgPath = chrome.runtime.getURL('img/trashBoxIn.png');
+    this.trashBoxOutImgPath = chrome.runtime.getURL('img/trashBoxOut.png');
+    this.trashBoxHideImgPath = chrome.runtime.getURL('img/trashBoxHide.png');
+    this.trashBoxShowImgPath = chrome.runtime.getURL('img/trashBoxShow.png');
     this.hiddenContentSpaceId = 'hiddenContentSpace';
     this.hiddenContentNumId = 'hiddenContentNum';
     this.hiddenContentNum = 0;
