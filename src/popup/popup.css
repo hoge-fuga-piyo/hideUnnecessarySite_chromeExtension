@@ -6,6 +6,14 @@ body {
   overflow: auto;
 }
 
+table {
+  table-layout: fixed;
+}
+
+table td {
+  overflow-wrap : break-word;
+}
+
 .removeButton {
   float: right;
 }
