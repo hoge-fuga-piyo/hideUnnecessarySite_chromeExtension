@@ -44,6 +44,9 @@ class HiddenContent {
     $(() => {
       $('#addButton').on('click', ()=> {
         let url = decodeURIComponent($('#newUrl').val());
+        if(url == '') {
+          return;
+        }
         chrome.storage.local.set({[url] : true}, ()=> {
           this.showHiddenUrls();
         });

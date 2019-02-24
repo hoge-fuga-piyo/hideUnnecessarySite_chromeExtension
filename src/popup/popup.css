@@ -11,5 +11,11 @@ body {
 }
 
 #noContentText {
-  display:none;
+  display: none;
 }
+
+/*
+#newUrl {
+  width: 100%;
+}
+*/
