@@ -18,7 +18,7 @@ class HiddenContent {
       // 非表示対象のURLを表示
       $('#' + this.urlsId).empty();
       for(let key of allKeys) {
-        $('#' + this.urlsId).append('<div class="hiddenContent"><a href="' + decodeURIComponent(key) + '">' + decodeURIComponent(key) + '</a><button class="removeButton" type=button>close</button></div>');
+        $('#' + this.urlsId).append('<div class="hiddenContent"><a href="' + decodeURIComponent(key) + '">' + decodeURIComponent(key) + '</a><span class="removeButton"></span></div>');
       }
     
       $('#' + this.urlsId).on('click', 'a', (e) => {
@@ -42,7 +42,7 @@ class HiddenContent {
   
   addHiddenContent() {
     $(() => {
-      $('#addButton').on('click', ()=> {
+      $('.addButton').on('click', ()=> {
         let url = decodeURIComponent($('#newUrl').val());
         if(url == '') {
           return;
