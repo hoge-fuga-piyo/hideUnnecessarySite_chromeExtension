@@ -51,7 +51,7 @@ class HiddenContent {
     $(() => {
       $('.addButton').on('click', ()=> {
         let url = decodeURIComponent($('#newUrl').val());
-        if(url == '') {
+        if(!this.isUrl(url)) {
           return;
         }
         chrome.storage.local.set({[url] : true}, ()=> {
@@ -59,5 +59,16 @@ class HiddenContent {
         });
       });
     });
+  }
+
+  isUrl(url) {
+    const urlPattern = /^(http|https):\/\/([a-z]|[A-Z]|[0-9])+\.([a-z]|[A-Z]|[0-9])/;
+    if(url == '') {
+      return false;
+    }
+    if(url.match(urlPattern)) {
+      return true;
+    }
+    return false;
   }
 }
