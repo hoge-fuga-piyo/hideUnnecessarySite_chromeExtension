@@ -18,7 +18,14 @@ class HiddenContent {
       // 非表示対象のURLを表示
       $('#' + this.urlsId).empty();
       for(let key of allKeys) {
-        $('#' + this.urlsId).append('<div class="hiddenContent"><a href="' + decodeURIComponent(key) + '">' + decodeURIComponent(key) + '</a><span class="removeButton"></span></div>');
+        $('#' + this.urlsId).append(
+          '<tr><td>' +
+            '<a href="' + decodeURIComponent(key) + '">' + decodeURIComponent(key) + '</a>' +
+          '</td>' +
+          '<td width=30px>' +
+            '<span class="removeButton"></span>' +
+          '</td></tr>'
+        );
       }
     
       $('#' + this.urlsId).on('click', 'a', (e) => {
@@ -30,9 +37,9 @@ class HiddenContent {
 
   declareRemoveButton() {
     $('.removeButton').on('click', {num: this.hiddenContentNum, noContentId: this.noContentId}, function(e) {
-      let url = $(this).prev('a').attr('href');
+      let url = $(this).parent().prev().find('a').attr('href');
       chrome.storage.local.remove(url, function(){});
-      $(this).parent('div').remove();
+      $(this).parent().parent().remove();
       e.data.num--;
       if(e.data.num === 0) {
         $('#' + e.data.noContentId).show();
