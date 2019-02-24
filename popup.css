@@ -9,3 +9,7 @@ body {
 .removeButton {
   float: right;
 }
+
+#no_content_text {
+  display:none;
+}
