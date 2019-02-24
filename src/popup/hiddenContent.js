@@ -16,6 +16,7 @@ class HiddenContent {
       }
 
       // 非表示対象のURLを表示
+      $('#' + this.urlsId).empty();
       for(let key of allKeys) {
         $('#' + this.urlsId).append('<div class="hiddenContent"><a href="' + decodeURIComponent(key) + '">' + decodeURIComponent(key) + '</a><button class="removeButton" type=button>close</button></div>');
       }
@@ -38,5 +39,15 @@ class HiddenContent {
       }
     });
   }
+  
+  addHiddenContent() {
+    $(() => {
+      $('#addButton').on('click', ()=> {
+        let url = decodeURIComponent($('#newUrl').val());
+        chrome.storage.local.set({[url] : true}, ()=> {
+          this.showHiddenUrls();
+        });
+      });
+    });
+  }
 }
-
