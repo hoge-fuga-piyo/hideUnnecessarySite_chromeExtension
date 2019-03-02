@@ -80,4 +80,14 @@ class HiddenContent {
     }
     return false;
   }
+
+  submit() {
+    $(function(){
+      $('#newUrl').keypress(function(e) {
+        if(e.which === 13) {
+          $('.addButton').click();
+        }
+      });
+    });
+  }
 }
