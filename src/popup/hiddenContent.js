@@ -13,6 +13,8 @@ class HiddenContent {
       // 非表示対象のURLがない場合
       if(this.hiddenContentNum === 0) {
         $('#' + this.noContentId).show();
+      } else {
+        $('#' + this.noContentId).hide();
       }
 
       // 非表示対象のURLを表示
@@ -41,6 +43,7 @@ class HiddenContent {
       chrome.storage.local.remove(url, function(){});
       $(this).parent().parent().remove();
       e.data.num--;
+      console.log(e.data.num);
       if(e.data.num === 0) {
         $('#' + e.data.noContentId).show();
       }
@@ -52,8 +55,10 @@ class HiddenContent {
       $('.addButton').on('click', ()=> {
         let url = decodeURIComponent($('#newUrl').val());
         if(!this.isUrl(url)) {
+          $('#errorInvalidUrl').show(200);
           return;
         }
+        $('#errorInvalidUrl').hide(200);
         chrome.storage.local.set({[url] : true}, ()=> {
           this.showHiddenUrls();
         });
