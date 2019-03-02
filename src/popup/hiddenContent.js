@@ -55,7 +55,11 @@ class HiddenContent {
       $('.addButton').on('click', ()=> {
         let url = decodeURIComponent($('#newUrl').val());
         if(!this.isUrl(url)) {
-          $('#errorInvalidUrl').show(200);
+          $('#errorInvalidUrl').show(200, function() {
+            setTimeout(() => {
+              $(this).hide(200);
+            }, 1000);
+          });
           return;
         }
         $('#errorInvalidUrl').hide(200);
