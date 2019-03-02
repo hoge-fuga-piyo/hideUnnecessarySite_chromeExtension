@@ -82,7 +82,7 @@ class HiddenContent {
   }
 
   submit() {
-    $(function(){
+    $(function() {
       $('#newUrl').keypress(function(e) {
         if(e.which === 13) {
           $('.addButton').click();
