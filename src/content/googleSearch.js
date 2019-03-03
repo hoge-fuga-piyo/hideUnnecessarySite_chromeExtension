@@ -6,28 +6,22 @@ class GoogleSearch extends SearchBase {
 
   addTrashBoxButton(element, index) {
     const id_name = this.trashBoxButtonIdPrefix + index;
-    let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox" width="14" height="16">');
+    //let action_menu = $(element).find('.action-menu' + '.ab_ctl');
+    let action_menu = $(element).find('a:first');
+    action_menu.before('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox" width="15" height="20">');
+    //action_menu.append('<input id=' + id_name + ' type="image" src=' + this.trashBoxInImgPath + ' alt="TrashBox" width="15" height="20">');
     const url = $(element).find('a').attr('href');
     super.declareTrashBoxButton(element, decodeURIComponent(url), index);
   }
 
   addPickUpTrashButton(element, index) {
     const id_name = this.pickUpTrashButtonIdPrefix + index;
-    let action_menu = $(element).find('.action-menu' + '.ab_ctl');
-    action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp" width="14" height="16">');
+    //let action_menu = $(element).find('.action-menu' + '.ab_ctl');
+    let action_menu = $(element).find('a:first');
+    action_menu.before('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp" width="16" height="20">');
+    //action_menu.after('<input id=' + id_name + ' type="image" src=' + this.trashBoxOutImgPath + ' alt="PickUp" width="16" height="20">');
     const url = $(element).find('a').attr('href');
     super.declarePickUpTrashButton(element, decodeURIComponent(url), index);
-  }
-
-  runExtension() {
-    let elements = $(this.frameClassName);
-    for(let i = 0; i < elements.length; i++) {
-      const url = $(elements[i]).find('a').attr('href');
-      super.initHideAndShow(elements[i], decodeURIComponent(url), i + 1);
-    }
-
-    this.addHiddenContentButton();
   }
 
   addHiddenContentButton() {
@@ -45,5 +39,15 @@ class GoogleSearch extends SearchBase {
       }
       this.declareHiddenContentButton();
     });
+  }
+
+  runExtension() {
+    let elements = $(this.frameClassName);
+    for(let i = 0; i < elements.length; i++) {
+      const url = $(elements[i]).find('a').attr('href');
+      super.initHideAndShow(elements[i], decodeURIComponent(url), i + 1);
+    }
+
+    this.addHiddenContentButton();
   }
 }
