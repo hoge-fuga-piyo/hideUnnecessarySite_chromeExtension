@@ -37,7 +37,7 @@ class SearchBase {
     const id_name = this.trashBoxButtonIdPrefix + index;
     $('#' + id_name).on('click', () => {
       chrome.storage.local.set({[url] : true}, function(){});
-      if(this.hiddenContentState === "HIDE") {
+      if(this.hiddenContentState === 'HIDE') {
         $(element).slideUp(200, () => {
           $(element).css('background-color', this.trashUrlBackgroundColor);
         });
@@ -48,6 +48,9 @@ class SearchBase {
       $(element).addClass(this.hiddenContentClass);
       this.addPickUpTrashButton(element, index);
       this.hiddenContentNum++;
+      if(this.hiddenContentNum !== 0) {
+        $('#' + this.hiddenContentSpaceId).show(200);
+      }
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
     });
   }
@@ -65,6 +68,11 @@ class SearchBase {
       $(element).removeClass(this.hiddenContentClass);
       $('#' + id_name).remove();
       this.hiddenContentNum--;
+      if(this.hiddenContentNum === 0) {
+        $('#' + this.hiddenContentSpaceId).hide(200);
+        this.hiddenContentState = 'HIDE';
+        $('#' + this.hiddenContentButtonId).attr('src', this.trashBoxHideImgPath);
+      }
       $('#' + this.hiddenContentNumId).text(this.hiddenContentNum);
       this.addTrashBoxButton(element, index);
     });
